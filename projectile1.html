@@ -1,0 +1,214 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
+<link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.2.9.min.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.2.9.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var RS_modules = {};
+var V_vs_t, VDots, a_vs_t, aDots, y, V, drag, t, output;
+RS_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = RS_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var RS_Iter0 = string_funcs;
+        RS_Iter0 = ((typeof RS_Iter0[Symbol.iterator] === "function") ? (RS_Iter0 instanceof Map ? RS_Iter0.keys() : RS_Iter0) : Object.keys(RS_Iter0));
+        for (var RS_Index0 of RS_Iter0) {
+            name = RS_Index0;
+            (RS_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name] = (RS_expr_temp = RS_str.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name];
+        }
+    };
+
+    RS_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+    var version, box, sphere, simple_sphere, cylinder, pyramid, cone, helix, ellipsoid, ring, arrow, compound, display, vector, print, arange, type, scene, RS_ls, ball, ground, g, y, V, dt, drag, t, V_vs_t, VDots, a_vs_t, aDots, dragSlider, dragSliderReadout, heightSlider, heightSliderReadout, rbutton, abutton;
+    version = RS_list_decorate([ "2.9", "glowscript" ]);
+    Array.prototype['+']=function(r) {return this.concat(r)}
+    Array.prototype['*']=function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    box = vp_box;
+    sphere = vp_sphere;
+    simple_sphere = vp_simple_sphere;
+    cylinder = vp_cylinder;
+    pyramid = vp_pyramid;
+    cone = vp_cone;
+    helix = vp_helix;
+    ellipsoid = vp_ellipsoid;
+    ring = vp_ring;
+    arrow = vp_arrow;
+    compound = vp_compound;
+    display = canvas;
+    vector = vec;
+    print = GSprint;
+    arange = range;
+    type = pytype;
+    scene = canvas();
+    var strings = RS_modules.pythonize.strings;
+
+    strings();
+    "3";
+    scene.width = 400;
+    "4";
+    scene.center = vector(0, 5, 0);
+    "5";
+    scene.height = 200;
+    "7";
+    ball = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(0, 10, 0), radius: .5, color: color.red, make_trail: false, trail_type: "points", retain: 100})]);
+    "8";
+    ground = RS_interpolate_kwargs.call(this, box, [RS_desugar_kwargs({pos: vector(0, 0, 0), size: vector(10, .1, 10), color: color.blue})]);
+    "11";
+    g = 9.8["-u"]();
+    "12";
+    y = 10;
+    "13";
+    V = 0;
+    "14";
+    dt = .01;
+    "15";
+    drag = 0;
+    "16";
+    t = 0;
+    "18";
+    V_vs_t = RS_interpolate_kwargs.call(this, graph, [RS_desugar_kwargs({width: 300, height: 200, title: "<b> Velcoity vs Time <\/b>", xtitle: "<i> time </i>", ytitle: "<i> Velocity <i>"})]);
+    "20";
+    VDots = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.green})]);
+    "22";
+    a_vs_t = RS_interpolate_kwargs.call(this, graph, [RS_desugar_kwargs({width: 300, height: 200, title: "<b> Acceleration versus Time </b> ", xtitle: "<i> Time </i>", ytitle: "<i> Acceleration <i>"})]);
+    "24";
+    aDots = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.red})]);
+    "27";
+    async function makegraphs() {
+        "28";
+        "30";
+        V_vs_t = RS_interpolate_kwargs.call(this, graph, [RS_desugar_kwargs({width: 400, height: 200, title: "<b> Velcoity vs Time </b>", xtitle: "<i> time </i>", ytitle: "<i> Velocity <i>"})]);
+        "32";
+        VDots = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.green})]);
+        "35";
+        a_vs_t = RS_interpolate_kwargs.call(this, graph, [RS_desugar_kwargs({width: 300, height: 200, title: "<b> Acceleration versus Time </b> ", xtitle: "<i> Time </i>", ytitle: "<i> Acceleration <i>"})]);
+        "37";
+        aDots = RS_interpolate_kwargs.call(this, gdots, [RS_desugar_kwargs({color: color.red})]);
+        "39";
+        return [V_vs_t, VDots, a_vs_t, aDots];
+    };
+
+    "41";
+    async function deletegraphs() {
+        "42";
+        V_vs_t.remove();
+        "43";
+        a_vs_t.remove();
+    };
+
+    "52";
+    ;(await makegraphs());
+    "54";
+    async function airdrop() {
+        var RS_ls, a, string;
+        "55";
+        "56";
+        while (ball.pos.y["-"](ball.radius)[">"](0)) {
+            "57";
+            ;(await rate(100));
+            "58";
+            a = g["+"](drag["*"](GS_power(V, 2)));
+            "59";
+            y=y["+"](V["*"](dt));
+            "60";
+            V=V["+"](a["*"](dt));
+            "61";
+            ball.pos = vector(0, y, 0);
+            "62";
+            t=t["+"](dt);
+            "64";
+            VDots.plot(t, V);
+            "65";
+            aDots.plot(t, a);
+        }
+        "67";
+        string = "finished in: "["+"](str(t))["+"](" seconds ")["+"]("final velcoity of: ")["+"](str(V))["+"](" m/s");
+        "69";
+        output = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "\n"["+"](string)})]);
+        "71";
+        return output;
+    };
+
+    "77";
+    async function adjustDrag() {
+        "78";
+        dragSliderReadout.text = dragSlider.value;
+    };
+
+    "80";
+    dragSlider = RS_interpolate_kwargs.call(this, slider, [RS_desugar_kwargs({max: 5, min: 0, step: .1, value: 0, bind: adjustDrag})]);
+    "81";
+    scene.append_to_caption("Drag: ");
+    "82";
+    dragSliderReadout = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: "0"})]);
+    "84";
+    async function adjustHeight() {
+        "85";
+        heightSliderReadout.text = heightSlider.value;
+    };
+
+    "87";
+    heightSlider = RS_interpolate_kwargs.call(this, slider, [RS_desugar_kwargs({min: 0, max: 100, step: 1, value: y, bind: adjustHeight})]);
+    "88";
+    scene.append_to_caption("Height: ");
+    "89";
+    heightSliderReadout = RS_interpolate_kwargs.call(this, wtext, [RS_desugar_kwargs({text: y})]);
+    "92";
+    async function reset() {
+        "93";
+        "94";
+        y = heightSlider.value;
+        "95";
+        V = 0;
+        "96";
+        t = 0;
+        "97";
+        drag = dragSlider.value;
+        "98";
+        ball.pos = vector(0, y, 0);
+        "99";
+        scene.center = vector(0, ball.pos.y["/"](2), 0);
+        "100";
+        ;(await deletegraphs());
+        "101";
+        ;(await makegraphs());
+    };
+
+    "103";
+    rbutton = RS_interpolate_kwargs.call(this, button, [RS_desugar_kwargs({bind: reset, text: "reset"})]);
+    "104";
+    abutton = RS_interpolate_kwargs.call(this, button, [RS_desugar_kwargs({bind: airdrop, text: "start"})]);
+};
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
